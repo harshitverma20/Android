@@ -126,39 +126,10 @@ public class Change extends AppCompatActivity {
                     Intent intent = new Intent(Change.this , MedicineReminder.class);
                     startActivity(intent);
 
-                    sendNotification();
                 }
 
             }
         });
     }
 
-    public void sendNotification() {
-        NotificationCompat.Builder mBuilder = new
-                NotificationCompat.Builder(Change.this, "new_notify")
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("Medicine Reminder")
-                .setContentText("It's medicine time!!");
-
-        int mNotificationId = 001;
-        NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-
-        //   notificationManager.notify(mNotificationId, mBuilder.build());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("new_notify",
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
-        }
-
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        mBuilder.setSound(alarmSound);
-
-        long[] vibrate = {100,200,300,400};
-        mBuilder.setVibrate(vibrate);
-
-        notificationManager.notify(0, mBuilder.build());
-
-
-    }
 }
